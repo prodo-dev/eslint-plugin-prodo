@@ -46,6 +46,13 @@ ruleTester.run("sort-imports-by-path", rule, {
       code: "import type {b} from \"b\";\nimport {a} from \"a\";",
       parser: parser,
     },
+    {
+      code: "import {b} from \"b\";\nimport type {a} from \"a\";",
+      parser: parser,
+      options: [{
+        sortOrder: ["named", "types", "unnamed"]
+      }]
+    }
   ],
 
   invalid: [
