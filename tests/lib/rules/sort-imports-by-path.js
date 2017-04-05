@@ -91,7 +91,7 @@ ruleTester.run("sort-imports-by-path", rule, {
     {
       code: "import {a} from \"a\";\nimport type {b} from \"b\";",
       errors: [{
-        message: "Imports should be sorted according to path.",
+        message: "types imports should come before named imports.",
         type: "ImportDeclaration",
       }],
       parser: parser,
