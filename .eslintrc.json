@@ -1,0 +1,20 @@
+{
+  "ecmaFeatures": {
+    "jsx": true,
+    "modules": true
+  },
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "parser": "babel-eslint",
+  "plugins": [
+    "babel"
+  ],
+  "rules": {
+    "eqeqeq": ["error", "smart"],
+    "no-await-in-loop": "error",
+    "no-console": "error",
+    "no-unused-vars": "error"
+  }
+}

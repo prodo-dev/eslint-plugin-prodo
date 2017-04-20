@@ -50,32 +50,58 @@ ruleTester.run("sort-imports-by-path", rule, {
       code: "import {b} from \"b\";\nimport type {a} from \"a\";",
       parser: parser,
       options: [{
-        sortOrder: ["named", "types", "unnamed"]
-      }]
-    }
+        sortOrder: ["named", "type", "unnamed"]
+      }],
+    },
+    {
+      code: "//This is a comment\n\nimport a from \"a\";",
+      parser: parser,
+    },
+    {
+      code: "const x = 0;\n\nimport a from \"a\";",
+      parser: parser,
+      options: [{
+        importsAtStart: false,
+      }],
+    },
+    {
+      code: "import {a, b} from \"a\";",
+      parser: parser,
+    },
+    {
+      code: "import {B, a} from \"a\";",
+      parser: parser,
+      options: [{
+        ignoreCase: false,
+      }],
+    },
+    {
+      code: "import b, {a} from \"a\";",
+      parser: parser,
+    },
   ],
 
   invalid: [
     {
-        code: "import b from \"b\";\nimport a from \"a\";",
-        errors: [{
-          message: "Imports should be sorted according to path.",
-          type: "ImportDeclaration",
-        }],
-        parser: parser,
+      code: "import b from \"b\";\nimport a from \"a\";",
+      errors: [{
+        message: "Import order is not correct.",
+        type: "ImportDeclaration",
+      }],
+      parser: parser,
     },
     {
-        code: "import a from \"b\";\nimport b from \"a\";",
-        errors: [{
-          message: "Imports should be sorted according to path.",
-          type: "ImportDeclaration",
-        }],
-        parser: parser,
+      code: "import a from \"b\";\nimport b from \"a\";",
+      errors: [{
+        message: "Import order is not correct.",
+        type: "ImportDeclaration",
+      }],
+      parser: parser,
     },
     {
       code: "import a from \"a\";\nimport b from \"./b\";",
       errors: [{
-        message: "Imports should be sorted according to path.",
+        message: "Import order is not correct.",
         type: "ImportDeclaration",
       }],
       parser: parser,
@@ -83,7 +109,7 @@ ruleTester.run("sort-imports-by-path", rule, {
     {
       code: "import b from \"./aaa/a\";\nimport a from \"./aa/a\";",
       errors: [{
-        message: "Imports should be sorted according to path.",
+        message: "Import order is not correct.",
         type: "ImportDeclaration",
       }],
       parser: parser,
@@ -91,8 +117,46 @@ ruleTester.run("sort-imports-by-path", rule, {
     {
       code: "import {a} from \"a\";\nimport type {b} from \"b\";",
       errors: [{
-        message: "types imports should come before named imports.",
+        message: "Import order is not correct.",
         type: "ImportDeclaration",
+      }],
+      parser: parser,
+    },
+    {
+      code: "const x = 0;\n\nimport {a} from \"a\";",
+      errors: [{
+        message: "All imports should go at the top of the file.",
+        type: "ImportDeclaration",
+      }],
+      parser: parser,
+      options: [{
+        importsAtStart: true,
+      }],
+    },
+    {
+      code: "import {b, a} from \"a\";",
+      errors: [{
+        message: "Import specifiers should be sorted alphabetically.",
+        type: "ImportDeclaration",
+      }],
+      parser: parser,
+    },
+    {
+      code: "import a, {c, b} from \"a\";",
+      errors: [{
+        message: "Import specifiers should be sorted alphabetically.",
+        type: "ImportDeclaration",
+      }],
+      parser: parser,
+    },
+    {
+      code: "import {B, a} from \"a\";",
+      errors: [{
+        message: "Import specifiers should be sorted alphabetically.",
+        type: "ImportDeclaration",
+      }],
+      options: [{
+        ignoreCase: true,
       }],
       parser: parser,
     }
