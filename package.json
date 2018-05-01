@@ -1,6 +1,6 @@
 {
-  "name": "eslint-plugin-prodo",
-  "version": "0.0.0",
+  "name": "@prodo-ai/eslint-plugin-prodo",
+  "version": "1.0.0",
   "description": "Prodo's custom ESLint stuff",
   "repository": {
     "type": "git",
@@ -14,6 +14,7 @@
   "author": "Tom Dawes",
   "main": "lib/index.js",
   "scripts": {
+    "eslint": "eslint src test --color && echo 'No errors.'",
     "test": "mocha tests --recursive"
   },
   "dependencies": {

@@ -1,20 +1,33 @@
 {
-  "ecmaFeatures": {
-    "jsx": true,
-    "modules": true
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 8,
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    }
   },
   "env": {
     "node": true,
     "es6": true
   },
-  "parser": "babel-eslint",
   "plugins": [
-    "babel"
+    "babel",
+    "prettier"
+  ],
+  "extends": [
+    "prettier"
   ],
   "rules": {
+    "prettier/prettier": ["error", {
+      "bracketSpacing": false,
+      "trailingComma": "all"
+    }],
     "eqeqeq": ["error", "smart"],
     "no-await-in-loop": "error",
     "no-console": "error",
-    "no-unused-vars": "error"
+    "no-unused-vars": "error",
+    "require-await": "error"
   }
 }

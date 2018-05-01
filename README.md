@@ -36,16 +36,16 @@ Then configure the rules you want to use under the rules section.
 ```json
 {
     "rules": {
-        "prodo/rule-name": 2
+      "prodo/sort-imports-by-path": ["error", {
+        "sortOrder": ["type", "named", "unnamed"],
+        "enforceBlankLine": true,
+        "enforceTrailingLine": true,
+        "ignoreCase": true
+      }],
     }
 }
 ```
 
 ## Supported Rules
 
-* Fill in provided rules here
-
-
-
-
-
+* `sort-imports-by-path`
